@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<workspace>
+	<settings>
+		<label>HNScraper</label>
+	</settings>
+	<users>
+		<user>
+			<path>HNScraper.jcu</path>
+		</user>
+	</users>
+	<projects>
+		<project>
+			<path>HNScraper.jcp</path>
+		</project>
+	</projects>
+</workspace>
