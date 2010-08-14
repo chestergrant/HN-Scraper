@@ -8,41 +8,42 @@ public class Page {
 	String pageURL;
 	String nextPattern;
 	String postPattern;
-	String urlContent
+	String urlContent;
 	String base;
 	Boolean stop;
 	WebPage aURL;
 	public Page(String pageURL){
+		nextPattern = "(href){1}[\\w|\\W]*(More){1}";
+		postPattern = "(class=\"title\"){1}[\\w|\\W]*((comment)|(discuss)){1}";
+		this.pageURL = pageURL;		
 		handle = null;
-		this.next = null;
-		this.pageURL = pageURL;
-		getNext();
-		nextPattern = "(href){1}[\w|\W]*(More){1}";
-		postPattern = "(class=\"title\"){1}[\w|\W]*((comment)|(discuss)){1}";
-		base = getBase();
-		obtainContent();
+		this.next = null;				
 		stop = false;
+		base = getBase();
+		obtainContent();	
+		getNext();		
+			
+	}
+	private void obtainContent(){
 		aURL = new WebPage(pageURL);
 		try{
 			urlContent = aURL.getContent();		
 		}catch(IOException ex){
-			System.out.println("Error reading page");
+			System.out.println("Error reading pagex");
 			System.exit(1);
 		}
-		
 	}
-	
-	private stripPost(String aLine){
+	private void stripPost(String aLine){
 		PostConverter conv = new PostConverter(aLine);
 		stop = conv.stop();
-		if(!stop) handler.store(conv.getPost());
+		if(!stop) handle.store(conv.getPost());
 	}
 	//Scrape the page for it's post
 	public void scrape(){
 	 Pattern pattern = Pattern.compile(postPattern);
 	 Matcher matcher = pattern.matcher(this.urlContent);
 	 while((matcher.find())&&(stop == false)){
-	 	stripPost(match.group());
+	 	stripPost(matcher.group());
 	 }
 	}
 	public Boolean stop(){
@@ -65,9 +66,9 @@ public class Page {
 	}
 	
 	//Concatenate the output of Next
-	private int concatNext(String out, char c, int read){
+	private int concatNext(String output, char c, int read){
 		if(c=='/')read = 1;
-		if(read == 1)output += s.charAt(i);		
+		if(read == 1)output += c;		
 		if(c=='"')read = 0;		
 		return read;
 	}
@@ -77,7 +78,7 @@ public class Page {
 	 Pattern pattern = Pattern.compile(nextPattern);
 	 Matcher matcher = pattern.matcher(this.urlContent);
 	 while(matcher.find()){
-	 	next = base + setNext(match.group());
+	 	next = base + setNext(matcher.group());
 	 }
 	   	
 	}

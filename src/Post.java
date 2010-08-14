@@ -1,3 +1,4 @@
+import java.util.*;
 //Stores one Post
 public class Post {
 	Vector dataPoint;

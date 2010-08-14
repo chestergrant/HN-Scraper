@@ -8,6 +8,7 @@
  */
 
 import java.util.*;
+import java.io.*;
 public class HNScraper implements StorageClass {
 	Vector posts;  //Store all the post scraped
 	String site;   //Location of HN page being scraped
@@ -27,8 +28,9 @@ public class HNScraper implements StorageClass {
     //Scrape the posts of the site
     public void scrape(){
     	String currentSite = site;
+    	Page currentPage;
     	do{
-    		Page currentPage = new Page(currentSite);
+    		currentPage = new Page(currentSite);
     		currentPage.addHandle(this);   
     		currentPage.scrape(); 		
     		currentSite = currentPage.nextPage();

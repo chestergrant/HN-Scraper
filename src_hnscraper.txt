@@ -1,0 +1,6 @@
+"C:\\Users\\chester\\Documents\\JCreator LE\\MyProjects\\HNScraper\\src\\HNScraper.java"
+"C:\\Users\\chester\\Documents\\JCreator LE\\MyProjects\\HNScraper\\src\\Page.java"
+"C:\\Users\\chester\\Documents\\JCreator LE\\MyProjects\\HNScraper\\src\\Post.java"
+"C:\\Users\\chester\\Documents\\JCreator LE\\MyProjects\\HNScraper\\src\\PostConverter.java"
+"C:\\Users\\chester\\Documents\\JCreator LE\\MyProjects\\HNScraper\\src\\StorageClass.java"
+"C:\\Users\\chester\\Documents\\JCreator LE\\MyProjects\\HNScraper\\src\\WebPage.java"

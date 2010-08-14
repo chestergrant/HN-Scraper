@@ -1,16 +1,20 @@
+import java.util.*;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+
 //Takes a line of hmtl and converts it to a post
 class PostConverter {
 	String inputLine;
 	Post aPost;
 	String hrefPattern;
 	String timePattern;
-	Boolean stop
+	Boolean stop;
 	public PostConverter(String inputLine){
 		this.inputLine = inputLine;
 		aPost = new Post();
-		stop = false
-		hrefPattern = "(href=){1}[\w|\W]*(</a>){1}";
-		timePattern = "(</a>){1}[\w|\W]*(ago){1}";
+		stop = false;
+		hrefPattern = "(href=){1}[\\w|\\W]*(</a>){1}";
+		timePattern = "(</a>){1}[\\w|\\W]*(ago){1}";
 	}
 	//Return whether we should stop reading post
 	public Boolean stop(){
@@ -26,9 +30,9 @@ class PostConverter {
 	}
 	
 	//Used in composing the link title
-	private int concatHRef(String out, char c, int read){
+	private int concatHRef(String output, char c, int read){
 		if(c=='>')read = 1;
-		if(read == 1)output += s.charAt(i);		
+		if(read == 1)output += c;		
 		if(c=='<')read = 0;		
 		return read;
 	}
@@ -39,11 +43,11 @@ class PostConverter {
 	 Matcher matcher = pattern.matcher(inputLine);
 	 int count = 0;
 	 while(matcher.find())
-	 	enterInPost(match.group(),count++);	 
+	 	enterInPost(matcher.group(),count++);	 
 	}
 	
 	//Get the data in between the link and put it in the post
-	private enterInPost(String aString, int count){
+	private void enterInPost(String aString, int count){
 		aString = hrefName(aString);
 		if(count ==2)aString = numComments(aString);
 		aPost.add(aString);
@@ -57,7 +61,7 @@ class PostConverter {
 	}
 	
 	//Returns the points obtain by the post
- 	private String getPoint(){
+ 	private String getPoints(){
  		String [] splitOne = inputLine.split("<span");
  		String [] splitTwo = splitOne[1].split("spam>");
  		String [] splitThree = hrefName(splitTwo[0]).split(" ");
@@ -68,7 +72,7 @@ class PostConverter {
  		Pattern pattern = Pattern.compile(timePattern);
 	    Matcher matcher = pattern.matcher(inputLine);
 	    while(matcher.find())
-	 	 return match.group();
+	 	 return matcher.group();
 	 	return "";	 
  	}
  	private String getTimeValue(String timeline){
@@ -86,8 +90,8 @@ class PostConverter {
  	private String convTime(String timeValue, String timeUnit){
  		long milliTime = getTimeInMilliSeconds(timeValue,timeUnit);
  		long currTime =(new Date()).getTime();
- 		currTime = currTime -milliTime
- 		Date pastTime = date(currTime);
+ 		currTime = currTime -milliTime;
+ 		Date pastTime = new Date(currTime);
  		return pastTime.toString(); 		
  	}
  	
@@ -97,14 +101,14 @@ class PostConverter {
  		if(timeUnit.compareTo("hour")==0)multiplier=60*60*1000;
  		if(timeUnit.compareTo("day")==0)multiplier=24*60*60*1000;
  		if(timeUnit.compareTo("days")==0)multiplier=24*60*60*1000;
- 		return Integer.parseInt(timeValue).intValue * multiplier;
+ 		return Integer.parseInt(timeValue) * multiplier;
  	}
  	
  	private String getTime(){
  		String timeline = findTimeLine();
  		String timeValue =getTimeValue(timeline);
  		String timeUnit = getTimeUnit(timeline);
- 		String realTime = convTime(timeValue,timeUnit)
+ 		String realTime = convTime(timeValue,timeUnit);
  		return realTime;
  	}
  	

@@ -1,12 +1,13 @@
 
 import java.io.*;
+import java.net.*;
 class WebPage {
-	String url
+	String url;
 	public WebPage(String url){
 		this.url = url;
 	}
 	
-	public String getContent() throw IOException{
+	public String getContent() throws IOException{
 		URL page = new URL(url);
         URLConnection conn = page.openConnection();
         BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
