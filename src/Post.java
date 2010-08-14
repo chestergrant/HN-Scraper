@@ -21,8 +21,8 @@ public class Post {
 	public String toString(){
 		String output="";
 		for(int i=0; i< dataPoint.size(); i++){
-			output += get(i);
+			output += get(i)+", ";
 		}		
-		return output;
+		return output.substring(0,output.length()-2);
 	}
 }

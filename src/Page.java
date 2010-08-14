@@ -13,15 +13,16 @@ public class Page {
 	Boolean stop;
 	WebPage aURL;
 	public Page(String pageURL){
-		nextPattern = "(href){1}[\\w|\\W]*(More){1}";
-		postPattern = "(class=\"title\"){1}[\\w|\\W]*((comment)|(discuss)){1}";
+		nextPattern = "(href){1}[\\w|\\W]*?(More){1}";
+		postPattern = "(class=\"title\"><a){1}[\\w|\\W]*?(((comment)|(discuss))</a){1}";
 		this.pageURL = pageURL;		
 		handle = null;
 		this.next = null;				
 		stop = false;
 		base = getBase();
 		obtainContent();	
-		getNext();		
+		getNext();
+		System.out.println(next);		
 			
 	}
 	private void obtainContent(){
@@ -34,6 +35,8 @@ public class Page {
 		}
 	}
 	private void stripPost(String aLine){
+		//System.out.println(aLine);
+		//System.exit(1);
 		PostConverter conv = new PostConverter(aLine);
 		stop = conv.stop();
 		if(!stop) handle.store(conv.getPost());

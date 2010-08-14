@@ -33,6 +33,26 @@
 				<path>src\HNScraper.java</path>
 				<folder>src</folder>
 			</fileitem>
+			<fileitem>
+				<path>src\Page.java</path>
+				<folder>src</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\Post.java</path>
+				<folder>src</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\PostConverter.java</path>
+				<folder>src</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\StorageClass.java</path>
+				<folder>src</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\WebPage.java</path>
+				<folder>src</folder>
+			</fileitem>
 		</include>
 	</files>
 	<tasks/>

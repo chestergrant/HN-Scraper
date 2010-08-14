@@ -13,8 +13,8 @@ class PostConverter {
 		this.inputLine = inputLine;
 		aPost = new Post();
 		stop = false;
-		hrefPattern = "(href=){1}[\\w|\\W]*(</a>){1}";
-		timePattern = "(</a>){1}[\\w|\\W]*(ago){1}";
+		hrefPattern = "(href=){1}[\\w|\\W]*?(</a){1}";
+		timePattern = "(</a>){1}?[\\w|\\W]{7,17}?(ago){1}";
 	}
 	//Return whether we should stop reading post
 	public Boolean stop(){
@@ -24,26 +24,29 @@ class PostConverter {
 	private String hrefName(String href){
 		String output="";
 		int read = 0;
-		for(int i = 0; i< href.length(); i++)
-			read = concatHRef(output, href.charAt(i),read);	
+		for(int i = 0; i< href.length(); i++){
+			char c = href.charAt(i);
+			if(c=='<')read = 0;	
+			if(read == 1)output += c;
+			if(c=='>'){read = 1;}
+					
+			
+		}
+		
+				
 	   	return output.replace(","," ");		
 	}
 	
-	//Used in composing the link title
-	private int concatHRef(String output, char c, int read){
-		if(c=='>')read = 1;
-		if(read == 1)output += c;		
-		if(c=='<')read = 0;		
-		return read;
-	}
-	
+
 	//Get all href links and stores them in a post
 	private void getHRef(){
 	 Pattern pattern = Pattern.compile(hrefPattern);
 	 Matcher matcher = pattern.matcher(inputLine);
 	 int count = 0;
-	 while(matcher.find())
-	 	enterInPost(matcher.group(),count++);	 
+	 while(matcher.find()){
+	 	enterInPost(matcher.group(),count++);
+	 } 
+	 		 
 	}
 	
 	//Get the data in between the link and put it in the post
@@ -63,7 +66,8 @@ class PostConverter {
 	//Returns the points obtain by the post
  	private String getPoints(){
  		String [] splitOne = inputLine.split("<span");
- 		String [] splitTwo = splitOne[1].split("spam>");
+ 		//System.out.println(splitOne.length);
+ 		String [] splitTwo = splitOne[splitOne.length-1].split("span>");
  		String [] splitThree = hrefName(splitTwo[0]).split(" ");
  		return splitThree[0];
  	}
@@ -106,9 +110,13 @@ class PostConverter {
  	
  	private String getTime(){
  		String timeline = findTimeLine();
+ 		//System.out.println(timeline);
  		String timeValue =getTimeValue(timeline);
+ 		//System.out.println(timeValue);
  		String timeUnit = getTimeUnit(timeline);
  		String realTime = convTime(timeValue,timeUnit);
+ 		//System.out.println(realTime);
+ 		//System.exit(1);
  		return realTime;
  	}
  	

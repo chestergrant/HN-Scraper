@@ -24,6 +24,7 @@ public class HNScraper implements StorageClass {
     //stores the post that result from the scrape
     public void store(Post aPost){
     	posts.add(aPost);
+    	System.out.println(aPost);
     }
     //Scrape the posts of the site
     public void scrape(){
@@ -34,7 +35,8 @@ public class HNScraper implements StorageClass {
     		currentPage.addHandle(this);   
     		currentPage.scrape(); 		
     		currentSite = currentPage.nextPage();
-    		stop = currentPage.stop();    	
+    		stop = currentPage.stop();   
+    		stop = true; 	
     	}while((currentPage.hasMore())&&(stop==false));
     }
     //Print out all the post collect to the output file

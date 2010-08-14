@@ -1,4 +1,3 @@
-
 import java.io.*;
 import java.net.*;
 class WebPage {
@@ -12,10 +11,11 @@ class WebPage {
         URLConnection conn = page.openConnection();
         BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
         String inputLine;
+        String output="";
         while ((inputLine = in.readLine()) != null) 
-            System.out.println(inputLine);
+            output += inputLine;
         in.close();
-        return inputLine;
+        return output;
 
 	}
 }
