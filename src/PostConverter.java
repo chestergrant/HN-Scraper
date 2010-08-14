@@ -87,6 +87,7 @@ class PostConverter {
  		String[] strSplit = timeline.split(" ");
  		if((strSplit[2].compareTo("day")==0)||(strSplit[2].compareTo("days")==0)){
  			stop = true;
+ 			
  		}
  		return strSplit[2]; 
  	}
@@ -103,8 +104,8 @@ class PostConverter {
  		long multiplier = 0;
  		if(timeUnit.compareTo("minute")==0)multiplier=60*1000;
  		if(timeUnit.compareTo("hour")==0)multiplier=60*60*1000;
- 		if(timeUnit.compareTo("day")==0)multiplier=24*60*60*1000;
- 		if(timeUnit.compareTo("days")==0)multiplier=24*60*60*1000;
+ 		if(timeUnit.compareTo("day")==0){multiplier=24*60*60*1000;  /*System.out.println("1");System.exit(1);*/}
+ 		if(timeUnit.compareTo("days")==0){multiplier=24*60*60*1000; /*System.out.println("2");System.exit(1);*/}
  		return Integer.parseInt(timeValue) * multiplier;
  	}
  	

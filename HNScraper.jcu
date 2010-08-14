@@ -11,6 +11,36 @@
 			<folderitem>
 				<path>src</path>
 			</folderitem>
+			<fileitem>
+				<path>src\Page.java</path>
+				<collapsedfolds>0;0;0;0;0;105;94;75;54;27</collapsedfolds>
+			</fileitem>
 		</project>
 	</projects>
+	<open_files>
+		<docitem>
+			<path>src\Post.java</path>
+			<source>true</source>
+			<index>0</index>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>src\PostConverter.java</path>
+			<source>true</source>
+			<index>1</index>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>src\Page.java</path>
+			<source>true</source>
+			<index>2</index>
+			<active>true</active>
+		</docitem>
+		<docitem>
+			<path>src\HNScraper.java</path>
+			<source>true</source>
+			<index>3</index>
+			<active>false</active>
+		</docitem>
+	</open_files>
 </workspace_user>

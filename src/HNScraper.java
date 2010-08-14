@@ -19,7 +19,7 @@ public class HNScraper implements StorageClass {
     	this.posts = new Vector();
     	this.site = site;
     	stop = false;
-    	first = new Page(this.site);
+    	//first = new Page(this.site);
     }
     //stores the post that result from the scrape
     public void store(Post aPost){
@@ -30,13 +30,21 @@ public class HNScraper implements StorageClass {
     public void scrape(){
     	String currentSite = site;
     	Page currentPage;
-    	do{
+    	do{ 
+    		try{
+    			Thread.sleep(500);
+    	    }catch(Exception ex){
+    	    	System.out.println("couldn't, sleep");
+    	    	System.exit(1);
+    	    }
+    		
     		currentPage = new Page(currentSite);
     		currentPage.addHandle(this);   
     		currentPage.scrape(); 		
     		currentSite = currentPage.nextPage();
-    		stop = currentPage.stop();   
-    		stop = true; 	
+    		stop = currentPage.stop(); 
+    		if(stop)break;	  
+    		//stop = true; 	
     	}while((currentPage.hasMore())&&(stop==false));
     }
     //Print out all the post collect to the output file
